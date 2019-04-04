@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-docker-deployment
+  labels:
+    app: hello-docker
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: hello-docker
+  template:
+    metadata:
+      labels:
+        app: hello-docker
+    spec:
+      containers:
+      - name: hello-docker
+        image: hello-docker:latest
+        ports:
+        - containerPort: 3000
+      - env:
+        - name: PORT
+          value: 3000
